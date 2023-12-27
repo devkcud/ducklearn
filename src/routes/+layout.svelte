@@ -75,16 +75,16 @@
   </section>
 </header>
 
-<main class="min-h-[calc(100vh-128px)]">
+<main class="min-h-[calc(100vh-128px)] grid place-items-center">
   <slot />
 </main>
 
 <footer
-  class="flex bleed-bg bleed-base-200 max-w-5xl justify-between items-center mx-auto px-2 h-[64px] bg-base-200 text-base-content"
+  class="flex bleed-bg bleed-base-200 max-w-5xl justify-between items-center flex-wrap mx-auto px-2 h-[64px] bg-base-200 text-base-content"
 >
   <p>&copy; 2023 - ducklearn.org</p>
   <div>
-    <p class="flex items-center justify-center gap-1 text-sm max-sm:hidden">
+    <p class="flex items-center justify-center gap-1 text-sm">
       Made with <iconify-icon icon="mdi:heart" width={12} class="inline text-error" /> by
       <a class="link" href="https://github.com/devkcud">devkcud</a>
     </p>
