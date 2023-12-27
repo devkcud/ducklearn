@@ -30,7 +30,7 @@
 
 <CookieUsage />
 
-<header class="navbar bg-base-200">
+<header class="navbar max-w-5xl bleed-bg bleed-base-200 mx-auto h-[64px]">
   <section class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl font-bold">
       <iconify-icon icon="mdi:duck" />
@@ -75,6 +75,18 @@
   </section>
 </header>
 
-<main>
+<main class="min-h-[calc(100vh-128px)]">
   <slot />
 </main>
+
+<footer
+  class="flex bleed-bg bleed-base-200 max-w-5xl justify-between items-center mx-auto px-2 h-[64px] bg-base-200 text-base-content"
+>
+  <p>&copy; 2023 - ducklearn.org</p>
+  <div>
+    <p class="flex items-center justify-center gap-1 text-sm max-sm:hidden">
+      Made with <iconify-icon icon="mdi:heart" width={12} class="inline text-error" /> by
+      <a class="link" href="https://github.com/devkcud">devkcud</a>
+    </p>
+  </div>
+</footer>
