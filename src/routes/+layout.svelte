@@ -4,20 +4,22 @@
   import Cookies from 'js-cookie';
 
   import 'iconify-icon';
+
+  import CookieUsage from '$lib/components/CookieUsage.svelte';
   import '../app.css';
 
   let themeController: HTMLInputElement;
-  let theme: string = 'dark';
+  let theme: string = Cookies.get('theme') || 'dark';
 
   onMount(() => {
-    if (Cookies.get('theme') !== undefined) {
-      theme = Cookies.get('theme')!;
-    }
-
     themeController.checked = theme === 'light';
   });
 
-  function changeTheme(event: Event) {
+  function setCookieTheme(event: Event) {
+    if (Cookies.get('use-cookies') !== 'true') {
+      return;
+    }
+
     const target = event.target as HTMLInputElement;
     Cookies.set('theme', target.checked ? 'light' : 'dark', {
       expires: 7,
@@ -25,6 +27,8 @@
     });
   }
 </script>
+
+<CookieUsage />
 
 <header class="navbar bg-base-200">
   <section class="flex-1">
@@ -40,7 +44,7 @@
       class="theme-controller"
       value="light"
       bind:this={themeController}
-      on:change={changeTheme}
+      on:change={setCookieTheme}
     />
 
     <iconify-icon icon="ph:sun" width={20} class="swap-off" />
