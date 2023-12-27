@@ -16,6 +16,7 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/eslint": "8.56.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.10.5",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -37,6 +38,7 @@
   },
   "type": "module",
   "dependencies": {
-    "iconify-icon": "^1.0.8"
+    "iconify-icon": "^1.0.8",
+    "js-cookie": "^3.0.5"
   }
 }

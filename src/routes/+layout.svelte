@@ -1,6 +1,29 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  // I don't know how to manage cookies inside a +layout.svelte file, I'll stick to js-cookie
+  import Cookies from 'js-cookie';
+
   import 'iconify-icon';
   import '../app.css';
+
+  let themeController: HTMLInputElement;
+  let theme: string = 'dark';
+
+  onMount(() => {
+    if (Cookies.get('theme') !== undefined) {
+      theme = Cookies.get('theme')!;
+    }
+
+    themeController.checked = theme === 'light';
+  });
+
+  function changeTheme(event: Event) {
+    const target = event.target as HTMLInputElement;
+    Cookies.set('theme', target.checked ? 'light' : 'dark', {
+      expires: 7,
+      sameSite: 'strict',
+    });
+  }
 </script>
 
 <header class="navbar bg-base-200">
@@ -12,7 +35,13 @@
   </section>
 
   <label class="swap swap-rotate mr-2">
-    <input type="checkbox" class="theme-controller" value="light" />
+    <input
+      type="checkbox"
+      class="theme-controller"
+      value="light"
+      bind:this={themeController}
+      on:change={changeTheme}
+    />
 
     <iconify-icon icon="ph:sun" width={20} class="swap-off" />
     <iconify-icon icon="ph:moon" width={20} class="swap-on" />
