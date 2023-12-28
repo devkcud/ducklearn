@@ -6,8 +6,13 @@ import { z } from 'zod';
 import type { Actions } from './$types';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
+export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {
+  const session = await locals.auth.validate();
+  if (session) throw redirect(StatusCodes.MOVED_TEMPORARILY, '/');
+};
+
 export const actions: Actions = {
-  default: async ({ request }) => {
+  default: async ({ request }: { request: Request }) => {
     const registerForm = z
       .object({
         username: z

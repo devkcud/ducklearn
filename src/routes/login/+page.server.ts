@@ -6,8 +6,13 @@ import { z } from 'zod';
 import type { Actions } from './$types';
 import { LuciaError } from 'lucia';
 
+export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {
+  const session = await locals.auth.validate();
+  if (session) throw redirect(StatusCodes.MOVED_TEMPORARILY, '/');
+};
+
 export const actions: Actions = {
-  default: async ({ request, locals }) => {
+  default: async ({ request, locals }: { request: Request; locals: App.Locals }) => {
     const registerForm = z.object({
       username: z
         .string({
