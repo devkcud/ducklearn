@@ -54,6 +54,10 @@
   };
 </script>
 
+<svelte:head>
+  <title>DuckLearn | Registrar</title>
+</svelte:head>
+
 <section class="w-full max-w-5xl flex gap-12 h-full px-4">
   <img
     src="https://placekitten.com/256/512"
@@ -129,9 +133,7 @@
     </form>
 
     <p class="text-center">
-      Já faz parte da nossa comunidade? <a class="link link-primary" href="/auth/login"
-        >Faça Login</a
-      >
+      Já faz parte da nossa comunidade? <a class="link link-primary" href="/login">Faça Login</a>
     </p>
   </div>
 </section>

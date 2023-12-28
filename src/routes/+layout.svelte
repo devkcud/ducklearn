@@ -7,6 +7,7 @@
 
   import CookieUsage from '$lib/components/CookieUsage.svelte';
   import '../app.css';
+  import ViewTransition from '$lib/components/ViewTransition.svelte';
 
   let themeController: HTMLInputElement;
   let theme: string = Cookies.get('theme') || 'dark';
@@ -76,6 +77,7 @@
 </header>
 
 <main class="min-h-[calc(100vh-128px)] grid place-items-center">
+  <ViewTransition />
   <slot />
 </main>
 

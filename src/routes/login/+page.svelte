@@ -6,6 +6,10 @@
   export let form: ActionData;
 </script>
 
+<svelte:head>
+  <title>DuckLearn | Entrar</title>
+</svelte:head>
+
 <section class="w-full max-w-5xl flex gap-12 h-full px-4">
   <div class="w-full my-auto">
     <div class="flex flex-col gap-2">
@@ -34,9 +38,7 @@
     </form>
 
     <p class="text-center">
-      Não faz parte dessa comunidade? <a class="link link-primary" href="/auth/register"
-        >Registre-se</a
-      >
+      Não faz parte dessa comunidade? <a class="link link-primary" href="/register">Registre-se</a>
     </p>
   </div>
 
