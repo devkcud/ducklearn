@@ -15,8 +15,9 @@ export const load: PageServerLoad = async ({
     const user = await prisma.user.findFirst({ where: { username } });
 
     if (!user) {
-      // Empty because it will be caught in the catch block
-      throw new Error();
+      return {
+        error: `Usuário não encontrado com o nome: ${username}`,
+      };
     }
 
     if (self?.user.userId !== user.id && user.profileVisibility === 'private') {
@@ -34,8 +35,10 @@ export const load: PageServerLoad = async ({
       stars: user.stars,
     };
   } catch (error) {
+    console.error(error);
+
     return {
-      error: `Usuário não encontrado com o nome: ${username}`,
+      error: 'Erro ao buscar perfil',
     };
   }
 };
