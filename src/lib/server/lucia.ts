@@ -14,12 +14,13 @@ export const auth = lucia({
       displayName: user.displayName,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      stars: user.stars,
       profileVisibility: user.profileVisibility,
     };
   },
   getSessionAttributes: () => {
     return {};
-  }
+  },
 });
 
 export type Auth = typeof auth;

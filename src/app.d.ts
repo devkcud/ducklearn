@@ -10,8 +10,10 @@ declare global {
     type DatabaseUserAttributes = {
       username: string;
       displayName: string;
+      about: string;
       createdAt: Date;
       updatedAt: Date;
+      stars: number;
       profileVisibility: 'public' | 'private' | 'protected';
     };
     type DatabaseSessionAttributes = Record<string, never>;

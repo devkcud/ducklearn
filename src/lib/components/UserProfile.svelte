@@ -1,6 +1,5 @@
 <script lang="ts">
   import Badges from '$lib/components/user/Badges.svelte';
-  import CommunityAwards from '$lib/components/user/CommunityAwards.svelte';
 
   export let data: {
     username: string;
@@ -8,11 +7,7 @@
     about: string;
     createdAt: Date;
     updatedAt: Date;
-    badges: string[];
-    awards: string[];
     stars: number;
-    followers: number;
-    following: number;
   };
 
   function formatDate(date: Date) {
@@ -53,9 +48,13 @@
       </div>
 
       <div>
-        <div class="flex items-center gap-1">
-          <Badges badges={data.badges} />
-        </div>
+        <!--
+        {#if data.badges.length > 0}
+          <div class="flex items-center gap-1">
+            <Badges badges={data.badges} />
+          </div>
+        {/if}
+        -->
         <span class="flex items-center gap-4 text-3xl text-primary font-bold">
           {data.displayName === data.username ? data.username : data.displayName}
         </span>
@@ -78,23 +77,26 @@
         </div>
       </div>
 
+      <!--
       <div>
         <iconify-icon icon="game-icons:shadow-follower" width={18} />
         Seguidores:
-        <div class="tooltip" data-tip={data.followers}>
-          <span class="link link-primary w-fit">{formatNumber(data.followers)}</span>
+        <div class="tooltip" data-tip={data.followers || 0}>
+          <span class="link link-primary w-fit">{formatNumber(data.followers || 0)}</span>
         </div>
       </div>
 
       <div>
         <iconify-icon icon="mingcute:user-follow-2-fill" width={18} />
         Seguindo:
-        <div class="tooltip" data-tip={data.following}>
-          <span class="link link-primary w-fit">{formatNumber(data.following)}</span>
+        <div class="tooltip" data-tip={data.following || 0}>
+          <span class="link link-primary w-fit">{formatNumber(data.following || 0)}</span>
         </div>
       </div>
+      -->
     </div>
 
+    <!--
     {#if data.awards.length !== 0}
       <div class="divider"></div>
 
@@ -104,6 +106,7 @@
         <CommunityAwards awards={data.awards} />
       </div>
     {/if}
+    -->
 
     <div class="divider"></div>
 
