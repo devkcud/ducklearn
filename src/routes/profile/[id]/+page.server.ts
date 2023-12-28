@@ -1,4 +1,5 @@
 import { auth } from '$lib/server/lucia';
+import prisma from '$lib/server/prisma';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({
@@ -12,7 +13,13 @@ export const load: PageServerLoad = async ({
   const { id } = params;
 
   try {
-    const user = await auth.getUser(id);
+    const userPrisma = await prisma.user.findFirst({
+      where: {
+        username: id,
+      },
+    });
+
+    const user = await auth.getUser(userPrisma!.id!);
 
     if (
       self?.user.userId !== id &&
@@ -26,8 +33,14 @@ export const load: PageServerLoad = async ({
     return {
       username: user.username,
       displayName: user.displayName,
+      about: '',
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      badges: [],
+      awards: [],
+      stars: 0,
+      followers: 0,
+      following: 0,
     };
   } catch (error) {
     return {

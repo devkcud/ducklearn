@@ -1,44 +1,33 @@
 <script lang="ts">
+  import 'iconify-icon';
+  import UserProfile from '$lib/components/UserProfile.svelte';
+
   export let data:
     | {
         username: string;
         displayName: string;
+        about: string;
         createdAt: Date;
         updatedAt: Date;
+        badges: string[];
+        awards: string[];
+        stars: number;
+        followers: number;
+        following: number;
       }
     | {
         error: string;
       };
-
-  function formatDate(date: Date) {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    }).format(date);
-  }
 </script>
 
 {#if 'error' in data}
-  <p>{data.error}</p>
+  <div class="flex flex-col gap-4">
+    <p class="text-error">{data.error}</p>
+    <a class="btn btn-primary btn-sm" href="/profile">
+      <iconify-icon icon="carbon:return" width={24} />
+      Voltar
+    </a>
+  </div>
 {:else}
-  <section class="flex flex-col gap-4">
-    <div>
-      <span class="text-5xl text-primary font-bold">
-        {data.displayName === data.username ? data.username : data.displayName}
-      </span>
-
-      {#if data.displayName !== data.username}
-        <p class="opacity-30">{data.username}</p>
-      {/if}
-    </div>
-
-    <div>
-      <p>Criado em: <span class="text-primary">{formatDate(data.createdAt)}</span></p>
-      <p>Atualizado em: <span class="text-primary">{formatDate(data.updatedAt)}</span></p>
-    </div>
-  </section>
+  <UserProfile {data} />
 {/if}
