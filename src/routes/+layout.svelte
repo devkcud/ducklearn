@@ -69,7 +69,7 @@
 
         <ul class="dropdown-content menu z-[1] p-2 mt-5 shadow bg-base-200 rounded-box w-52">
           <li>
-            <a href="/account">
+            <a href="/profile">
               <iconify-icon icon="mdi:account" />
               Profile
             </a>
