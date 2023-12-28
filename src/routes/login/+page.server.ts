@@ -46,11 +46,6 @@ export const actions: Actions = {
         attributes: {},
       });
 
-      console.log(session);
-
-      console.log(locals);
-      console.log(locals.auth);
-
       locals.auth.setSession(session);
     } catch (error) {
       if (

@@ -65,7 +65,7 @@
           </a>
         </li>
         <li>
-          <a href="/account/logout" class="text-error">
+          <a href="/logout" class="text-error">
             <iconify-icon icon="mdi:logout" />
             Logout
           </a>

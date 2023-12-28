@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {
@@ -13,6 +13,7 @@ export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) =
 
 export const actions: Actions = {
   default: async ({ request }: { request: Request }) => {
+    // NOTE: I don't think it's that necessary to add so much validation in the password field, so I will be keeping it as it is.
     const registerForm = z
       .object({
         username: z
