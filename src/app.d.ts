@@ -1,20 +1,22 @@
-import type { PrismaClient } from '@prisma/client';
-
 declare global {
-  namespace App {}
+  namespace App {
+    interface Locals {
+      auth: import('lucia').AuthRequest;
+    }
+  }
+
+  namespace Lucia {
+    type Auth = import('$lib/server/lucia').Auth;
+    type DatabaseUserAttributes = {
+      username: string;
+      displayName: string;
+      createdAt: Date;
+      updatedAt: Date;
+    };
+    type DatabaseSessionAttributes = Record<string, never>;
+  }
 
   var prisma: PrismaClient;
-}
-
-declare namespace Lucia {
-  type Auth = import('$lib/server/lucia').Auth;
-  type DatabaseUserAttributes = {
-    username: string;
-    displayName: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-  type DatabaseSessionAttributes = {};
 }
 
 export {};

@@ -10,13 +10,15 @@ export const auth = lucia({
   middleware: sveltekit(),
   getUserAttributes: (user) => {
     return {
-      id: user.id,
       username: user.username,
       displayName: user.displayName,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
   },
+  getSessionAttributes: () => {
+    return {};
+  }
 });
 
 export type Auth = typeof auth;
