@@ -64,7 +64,11 @@
     <section>
       <div class="dropdown dropdown-end">
         <button class="m-1">
-          <img src="https://placekitten.com/256/256" alt="Profile" class="rounded-full w-8 h-8" />
+          <img
+            src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={data.user.username}"
+            alt="Profile"
+            class="rounded-full w-8 h-8"
+          />
         </button>
 
         <ul class="dropdown-content menu z-[1] p-2 mt-5 shadow bg-base-200 rounded-box w-52">
