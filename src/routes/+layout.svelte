@@ -8,6 +8,7 @@
   import CookieUsage from '$lib/components/CookieUsage.svelte';
   import '../app.css';
   import ViewTransition from '$lib/components/ViewTransition.svelte';
+  import type { LayoutData } from './$types';
 
   let themeController: HTMLInputElement;
   let theme: string = Cookies.get('theme') || 'dark';
@@ -27,6 +28,13 @@
       sameSite: 'strict',
     });
   }
+
+  export let data: LayoutData & {
+    logged: boolean;
+    user: {
+      username: string;
+    };
+  };
 </script>
 
 <CookieUsage />
@@ -52,28 +60,41 @@
     <iconify-icon icon="ph:moon" width={20} class="swap-on" />
   </label>
 
-  <section>
-    <div class="dropdown dropdown-end">
-      <button class="m-1">
-        <img src="https://placekitten.com/256/256" alt="Profile" class="rounded-full w-8 h-8" />
-      </button>
+  {#if data.logged}
+    <section>
+      <div class="dropdown dropdown-end">
+        <button class="m-1">
+          <img src="https://placekitten.com/256/256" alt="Profile" class="rounded-full w-8 h-8" />
+        </button>
 
-      <ul class="dropdown-content menu z-[1] p-2 mt-5 shadow bg-base-200 rounded-box w-52">
-        <li>
-          <a href="/account">
-            <iconify-icon icon="mdi:account" />
-            Profile
-          </a>
-        </li>
-        <li>
-          <a href="/logout" class="text-error">
-            <iconify-icon icon="mdi:logout" />
-            Logout
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
+        <ul class="dropdown-content menu z-[1] p-2 mt-5 shadow bg-base-200 rounded-box w-52">
+          <li>
+            <a href="/account">
+              <iconify-icon icon="mdi:account" />
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="/logout" class="text-error">
+              <iconify-icon icon="mdi:logout" />
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  {:else}
+    <section>
+      <a href="/login" class="btn btn-ghost">
+        <iconify-icon icon="mdi:login" />
+        Entrar
+      </a>
+      <a href="/register" class="btn btn-ghost">
+        <iconify-icon icon="mdi:account-plus" />
+        Registrar
+      </a>
+    </section>
+  {/if}
 </header>
 
 <main class="min-h-[calc(100vh-128px)] grid place-items-center">
