@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { LuciaError } from 'lucia';
 
 export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {

@@ -59,6 +59,7 @@
     src="https://placekitten.com/256/512"
     alt="Side banner"
     class="w-[256px] object-cover max-sm:hidden"
+    style:--sidebar="banner"
   />
 
   <div class="w-full my-auto">
@@ -128,7 +129,15 @@
     </form>
 
     <p class="text-center">
-      Já faz parte da nossa comunidade? <a class="link link-primary" href="/login">Faça Login</a>
+      Já faz parte da nossa comunidade? <a class="link link-primary" href="/auth/login"
+        >Faça Login</a
+      >
     </p>
   </div>
 </section>
+
+<style>
+  img {
+    view-transition-name: var(--sidebar);
+  }
+</style>

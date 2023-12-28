@@ -34,7 +34,9 @@
     </form>
 
     <p class="text-center">
-      Não faz parte dessa comunidade? <a class="link link-primary" href="/register">Registre-se</a>
+      Não faz parte dessa comunidade? <a class="link link-primary" href="/auth/register"
+        >Registre-se</a
+      >
     </p>
   </div>
 
@@ -42,5 +44,12 @@
     src="https://placekitten.com/256/512"
     alt="Side banner"
     class="w-[256px] object-cover max-sm:hidden"
+    style:--sidebar="banner"
   />
 </section>
+
+<style>
+  img {
+    view-transition-name: var(--sidebar);
+  }
+</style>

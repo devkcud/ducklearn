@@ -17,13 +17,13 @@
 
     <div class="divider italic">Preparado para embarcar?</div>
 
-    <a class="btn btn-primary w-full" href="/register">
+    <a class="btn btn-primary w-full" href="/auth/register">
       <iconify-icon icon="ion:rocket-sharp" width={24} />
       Começar sua jornada
     </a>
     <p>
       Já é um explorador?
-      <a class="link link-primary" href="/login">Retome sua jornada</a>!
+      <a class="link link-primary" href="/auth/login">Retome sua jornada</a>!
     </p>
   </div>
 </section>
