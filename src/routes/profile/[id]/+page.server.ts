@@ -3,23 +3,25 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({
   params,
+  locals,
 }: {
   params: { id: string };
   locals: App.Locals;
 }) => {
+  const self = await locals.auth.validate();
   const { id } = params;
 
   try {
     const user = await auth.getUser(id);
 
-    /* TODO: Implementar visibilidade de perfil
-
-  if (user.profileVisibility === 'private') {
-    return fail(StatusCodes.FORBIDDEN, {
-      error: 'Este perfil é privado',
-    });
-  }
-  */
+    if (
+      self?.user.userId !== id &&
+      (user.profileVisibility === 'private' || user.profileVisibility === 'protected')
+    ) {
+      return {
+        error: 'Este perfil é privado',
+      };
+    }
 
     return {
       username: user.username,

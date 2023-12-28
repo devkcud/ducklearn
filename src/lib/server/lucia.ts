@@ -14,6 +14,7 @@ export const auth = lucia({
       displayName: user.displayName,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      profileVisibility: user.profileVisibility,
     };
   },
   getSessionAttributes: () => {

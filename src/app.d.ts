@@ -12,6 +12,7 @@ declare global {
       displayName: string;
       createdAt: Date;
       updatedAt: Date;
+      profileVisibility: 'public' | 'private' | 'protected';
     };
     type DatabaseSessionAttributes = Record<string, never>;
   }

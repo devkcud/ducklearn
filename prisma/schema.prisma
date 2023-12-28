@@ -9,11 +9,12 @@ datasource db {
 }
 
 model User {
-  id           String @id @unique
-  username     String @unique
-  displayName String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String   @id @unique
+  username          String   @unique
+  displayName       String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  profileVisibility String   @default("public")
 
   Session Session[]
   Key     Key[]

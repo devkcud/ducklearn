@@ -60,6 +60,7 @@ export const actions: Actions = {
           displayName: username,
           createdAt: new Date(),
           updatedAt: new Date(),
+          profileVisibility: 'public',
         },
       });
     } catch (error) {
