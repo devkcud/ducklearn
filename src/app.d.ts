@@ -6,4 +6,15 @@ declare global {
   var prisma: PrismaClient;
 }
 
+declare namespace Lucia {
+  type Auth = import('$lib/server/lucia').Auth;
+  type DatabaseUserAttributes = {
+    username: string;
+    displayName: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  type DatabaseSessionAttributes = {};
+}
+
 export {};
