@@ -1,40 +1,8 @@
 <script lang="ts">
   import Badges from '$lib/components/user/Badges.svelte';
+  import { formatDate, formatNumber } from '$lib/function/format';
 
-  export let data: {
-    username: string;
-    displayName: string;
-    about: string;
-    createdAt: Date;
-    updatedAt: Date;
-    stars: number;
-    badges: {
-      id: string;
-      name: string;
-    }[];
-  };
-
-  function formatDate(date: Date) {
-    return new Intl.DateTimeFormat('pt-BR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    }).format(date);
-  }
-
-  function formatNumber(numero: number) {
-    if (numero < 1000) {
-      return numero.toString();
-    } else if (numero < 1000000) {
-      return (numero / 1000).toFixed(1) + ' mil';
-    } else if (numero < 1000000000) {
-      return (numero / 1000000).toFixed(1) + ' milhões';
-    } else {
-      return (numero / 1000000000).toFixed(1) + ' bilhões';
-    }
-  }
+  export let data: Lucia.DatabaseUserAttributes;
 </script>
 
 <section class="flex h-full w-full max-sm:flex-col p-4">
@@ -115,12 +83,10 @@
     <div class="italic">
       <p>
         Conta criada em:
-        <br />
         <span class="text-primary">{formatDate(data.createdAt)}</span>
       </p>
       <p>
         Última atualização:
-        <br />
         <span class="text-primary">{formatDate(data.updatedAt)}</span>
       </p>
     </div>

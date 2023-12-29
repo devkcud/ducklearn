@@ -6,7 +6,7 @@
     if (!document.startViewTransition) return;
 
     return new Promise((resolve) => {
-    // @ts-expect-error Same thing upthere
+      // @ts-expect-error Same thing upthere
       document.startViewTransition(async () => {
         resolve();
         await navigation.complete;

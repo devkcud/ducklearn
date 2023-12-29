@@ -3,13 +3,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import { StatusCodes } from 'http-status-codes';
 import { z } from 'zod';
 
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-
-export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {
-  const session = await locals.auth.validate();
-  if (session) throw redirect(StatusCodes.MOVED_TEMPORARILY, '/');
-};
 
 export const actions: Actions = {
   default: async ({ request }: { request: Request }) => {
@@ -58,8 +53,10 @@ export const actions: Actions = {
         attributes: {
           username,
           displayName: username,
+          about: '',
           createdAt: new Date(),
           updatedAt: new Date(),
+          stars: 0,
           profileVisibility: 'public',
         },
       });

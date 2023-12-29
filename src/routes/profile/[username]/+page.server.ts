@@ -9,17 +9,11 @@ export const load: PageServerLoad = async ({
   locals: App.Locals;
 }) => {
   const self = await locals.auth.validate();
+
   const { username } = params;
 
   try {
-    const user = await prisma.user.findFirst({
-      where: {
-        username,
-      },
-      include: {
-        badges: true,
-      },
-    });
+    const user = await prisma.user.findFirst({ where: { username }, include: { badges: true } });
 
     if (!user) {
       return {
@@ -57,7 +51,6 @@ export const load: PageServerLoad = async ({
     };
   } catch (error) {
     console.error(error);
-
     return {
       error: 'Erro ao buscar perfil',
     };
