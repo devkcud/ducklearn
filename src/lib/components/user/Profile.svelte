@@ -2,7 +2,7 @@
   import Badges from '$lib/components/user/Badges.svelte';
   import { formatDate, formatNumber } from '$lib/function/format';
 
-  export let data: Lucia.DatabaseUserAttributes;
+  export let data: Lucia.DatabaseUserAttributes & { badges: { id: string; name: string }[] };
 </script>
 
 <section class="flex h-full w-full max-sm:flex-col p-4">
@@ -22,7 +22,7 @@
       <div>
         {#if data.badges.length > 0}
           <div class="flex items-center gap-1">
-            <Badges badges={data.badges} />
+            <Badges badges={data.badges.sort((a, b) => b.name.localeCompare(a.name))} />
           </div>
         {/if}
         <span class="flex items-center gap-4 text-3xl text-primary font-bold">

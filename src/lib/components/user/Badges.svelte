@@ -2,7 +2,7 @@
   export let badges: { id: string; name: string }[];
 </script>
 
-{#each badges as badge (badge.id)}
+{#each badges as badge}
   <span
     class="badge gap-1 items-center badge-outline"
     class:badge-primary={badge.name === 'staff'}
