@@ -8,7 +8,11 @@ export function formatDate(date: Date) {
   }).format(date);
 }
 
-export function formatNumber(numero: number) {
+export function formatNumber(numero: number, small = true) {
+  if (!small) {
+    return numero.toLocaleString('pt-BR');
+  }
+
   if (numero < 1000) {
     return numero.toString();
   } else if (numero < 1000000) {

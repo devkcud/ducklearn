@@ -42,7 +42,7 @@
       <div>
         <iconify-icon icon="mdi:star-four-points" width={18} />
         Estrelas:
-        <div class="tooltip" data-tip={data.stars}>
+        <div class="tooltip" data-tip={formatNumber(data.stars, false)}>
           <span class="text-primary w-fit">{formatNumber(data.stars)}</span>
         </div>
       </div>
