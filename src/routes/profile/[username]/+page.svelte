@@ -9,11 +9,11 @@
         about: string;
         createdAt: Date;
         updatedAt: Date;
-        badges: string[];
-        awards: string[];
         stars: number;
-        followers: number;
-        following: number;
+        badges: {
+          id: string;
+          name: string;
+        }[];
       }
     | {
         error: string;

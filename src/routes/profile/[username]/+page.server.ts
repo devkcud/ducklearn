@@ -12,7 +12,14 @@ export const load: PageServerLoad = async ({
   const { username } = params;
 
   try {
-    const user = await prisma.user.findFirst({ where: { username } });
+    const user = await prisma.user.findFirst({
+      where: {
+        username,
+      },
+      include: {
+        badges: true,
+      },
+    });
 
     if (!user) {
       return {
@@ -26,6 +33,19 @@ export const load: PageServerLoad = async ({
       };
     }
 
+    let badges: { id: string; name: string }[] = [];
+    const badgesList = user.badges.map(async (badge) => {
+      const badgeInfo = await prisma.badge.findFirst({
+        where: { id: badge.badgeId },
+      });
+
+      if (badgeInfo) {
+        badges = [...badges, badgeInfo];
+      }
+    });
+
+    await Promise.all(badgesList);
+
     return {
       username: user.username,
       displayName: user.displayName,
@@ -33,6 +53,7 @@ export const load: PageServerLoad = async ({
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       stars: user.stars,
+      badges,
     };
   } catch (error) {
     console.error(error);

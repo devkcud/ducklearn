@@ -2,26 +2,22 @@
   export let badges: { id: string; name: string }[];
 </script>
 
-{#each badges as badge}
-  {#if badge.name === 'staff'}
-    <span class="badge gap-1 items-center badge-outline badge-primary">
+{#each badges as badge (badge.id)}
+  <span
+    class="badge gap-1 items-center badge-outline"
+    class:badge-primary={badge.name === 'staff'}
+    class:badge-secondary={badge.name === 'robô'}
+    class:badge-success={badge.name === 'verificado'}
+  >
+    {#if badge.name === 'staff'}
       <iconify-icon icon="mdi:shield" width={12} />
-      staff
-    </span>
-  {:else if badge.name === 'bot'}
-    <span class="badge gap-1 items-center badge-outline">
+    {:else if badge.name === 'robô'}
       <iconify-icon icon="mdi:robot" width={12} />
-      bot
-    </span>
-  {:else if badge.name === 'verified'}
-    <span class="badge gap-1 items-center badge-outline badge-success">
+    {:else if badge.name === 'verificado'}
       <iconify-icon icon="mdi:verified" width={12} />
-      verified
-    </span>
-  {:else}
-    <span class="badge gap-1 items-center badge-outline">
+    {:else}
       <iconify-icon icon="mdi:star-three-points" width={12} />
-      {badge.name}
-    </span>
-  {/if}
+    {/if}
+    {badge.name}
+  </span>
 {/each}

@@ -8,6 +8,7 @@
     createdAt: Date;
     updatedAt: Date;
     stars: number;
+    badges: string[];
   };
 
   function formatDate(date: Date) {
@@ -48,13 +49,11 @@
       </div>
 
       <div>
-        <!--
         {#if data.badges.length > 0}
           <div class="flex items-center gap-1">
             <Badges badges={data.badges} />
           </div>
         {/if}
-        -->
         <span class="flex items-center gap-4 text-3xl text-primary font-bold">
           {data.displayName === data.username ? data.username : data.displayName}
         </span>
