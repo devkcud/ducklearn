@@ -8,7 +8,10 @@
     createdAt: Date;
     updatedAt: Date;
     stars: number;
-    badges: string[];
+    badges: {
+      id: string;
+      name: string;
+    }[];
   };
 
   function formatDate(date: Date) {
