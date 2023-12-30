@@ -4,7 +4,7 @@
 
 {#each badges as badge}
   <span
-    class="badge gap-1 items-center badge-outline"
+    class="badge badge-outline gap-1 items-center badge-sm"
     class:badge-primary={badge.name === 'staff'}
     class:badge-secondary={badge.name === 'robô'}
     class:badge-success={badge.name === 'verificado'}
