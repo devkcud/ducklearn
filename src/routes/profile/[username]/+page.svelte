@@ -3,7 +3,13 @@
   import Profile from '$lib/components/user/Profile.svelte';
 
   export let data:
-    | (Lucia.DatabaseUserAttributes & { badges: { id: string; name: string }[] })
+    | (Lucia.DatabaseUserAttributes & {
+        followers: { followerId: string; followingId: string }[];
+        following: { followerId: string; followingId: string }[];
+        canFollow: boolean;
+        isFollowing: boolean;
+        badges: { id: string; name: string }[];
+      })
     | { error: string };
 </script>
 

@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import type { PageServerLoad } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({
   params,
@@ -13,7 +13,10 @@ export const load: PageServerLoad = async ({
   const { username } = params;
 
   try {
-    const user = await prisma.user.findFirst({ where: { username }, include: { badges: true } });
+    const user = await prisma.user.findFirst({
+      where: { username },
+      include: { followers: true, following: true, badges: true },
+    });
 
     if (!user) {
       return {
@@ -40,6 +43,15 @@ export const load: PageServerLoad = async ({
 
     await Promise.all(badgesList);
 
+    const isFollowing = (await prisma.follows.findFirst({
+      where: {
+        followerId: self?.user.userId,
+        followingId: user.id,
+      },
+    }))
+      ? true
+      : false;
+
     return {
       username: user.username,
       displayName: user.displayName,
@@ -47,6 +59,10 @@ export const load: PageServerLoad = async ({
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       stars: user.stars,
+      followers: user.followers,
+      following: user.following,
+      canFollow: self?.user.userId !== user.id,
+      isFollowing,
       badges,
     };
   } catch (error) {
@@ -55,4 +71,55 @@ export const load: PageServerLoad = async ({
       error: 'Erro ao buscar perfil',
     };
   }
+};
+
+export const actions: Actions = {
+  follow: async ({ request, locals }) => {
+    const self = await locals.auth.validate();
+
+    const username = Object.fromEntries(await request.formData())['username'].toString();
+
+    const userToFollow = await prisma.user.findFirst({
+      where: { username },
+    });
+
+    try {
+      await prisma.follows.create({
+        data: {
+          followerId: self!.user.userId!,
+          followingId: userToFollow!.id,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      return {
+        error: 'Erro ao seguir',
+      };
+    }
+  },
+  unfollow: async ({ request, locals }) => {
+    const self = await locals.auth.validate();
+
+    const username = Object.fromEntries(await request.formData())['username'].toString();
+
+    const userToFollow = await prisma.user.findFirst({
+      where: { username },
+    });
+
+    try {
+      await prisma.follows.delete({
+        where: {
+          followerId_followingId: {
+            followerId: self!.user.userId!,
+            followingId: userToFollow!.id,
+          },
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      return {
+        error: 'Erro ao seguir',
+      };
+    }
+  },
 };

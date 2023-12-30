@@ -2,7 +2,13 @@
   import Badges from '$lib/components/user/Badges.svelte';
   import { formatDate, formatNumber } from '$lib/function/format';
 
-  export let data: Lucia.DatabaseUserAttributes & { badges: { id: string; name: string }[] };
+  export let data: Lucia.DatabaseUserAttributes & {
+    followers: { followerId: string; followingId: string }[];
+    following: { followerId: string; followingId: string }[];
+    canFollow: boolean;
+    isFollowing: boolean;
+    badges: { id: string; name: string }[];
+  };
 </script>
 
 <section class="flex h-full w-full max-sm:flex-col p-4">
@@ -47,23 +53,37 @@
         </div>
       </div>
 
-      <!--
       <div>
         <iconify-icon icon="game-icons:shadow-follower" width={18} />
         Seguidores:
-        <div class="tooltip" data-tip={data.followers || 0}>
-          <span class="link link-primary w-fit">{formatNumber(data.followers || 0)}</span>
+        <div class="tooltip" data-tip={data.followers.length || 0}>
+          <span class="link link-primary w-fit">{formatNumber(data.followers.length || 0)}</span>
         </div>
       </div>
 
       <div>
         <iconify-icon icon="mingcute:user-follow-2-fill" width={18} />
         Seguindo:
-        <div class="tooltip" data-tip={data.following || 0}>
-          <span class="link link-primary w-fit">{formatNumber(data.following || 0)}</span>
+        <div class="tooltip" data-tip={data.following.length || 0}>
+          <span class="link link-primary w-fit">{formatNumber(data.following.length || 0)}</span>
         </div>
       </div>
-      -->
+
+      {#if data.canFollow}
+        {#if data.isFollowing === false}
+          <form action="?/follow" method="POST">
+            <input type="hidden" name="username" value={data.username} />
+            <button class="btn btn-primary btn-sm w-full mt-8" type="submit">Seguir</button>
+          </form>
+        {:else}
+          <form action="?/unfollow" method="POST">
+            <input type="hidden" name="username" value={data.username} />
+            <button class="btn btn-primary btn-sm w-full mt-8" type="submit">
+              Deixar de seguir
+            </button>
+          </form>
+        {/if}
+      {/if}
     </div>
 
     <!--
