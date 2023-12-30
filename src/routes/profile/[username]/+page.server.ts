@@ -1,5 +1,7 @@
 import prisma from '$lib/server/prisma';
+import { StatusCodes } from 'http-status-codes';
 import type { Actions, PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({
   params,
@@ -92,10 +94,9 @@ export const actions: Actions = {
       });
     } catch (error) {
       console.error(error);
-      return {
-        error: 'Erro ao seguir',
-      };
     }
+
+    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/profile/${username}`);
   },
   unfollow: async ({ request, locals }) => {
     const self = await locals.auth.validate();
@@ -117,9 +118,8 @@ export const actions: Actions = {
       });
     } catch (error) {
       console.error(error);
-      return {
-        error: 'Erro ao seguir',
-      };
     }
+
+    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/profile/${username}`);
   },
 };

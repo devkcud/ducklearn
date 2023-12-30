@@ -73,13 +73,17 @@
         {#if data.isFollowing === false}
           <form action="?/follow" method="POST">
             <input type="hidden" name="username" value={data.username} />
-            <button class="btn btn-primary btn-sm w-full mt-8" type="submit">Seguir</button>
+            <button class="btn btn-primary btn-sm w-full mt-8" type="submit">
+              <iconify-icon icon="fe:user-plus" width={18} />
+              Seguir
+            </button>
           </form>
         {:else}
           <form action="?/unfollow" method="POST">
             <input type="hidden" name="username" value={data.username} />
-            <button class="btn btn-primary btn-sm w-full mt-8" type="submit">
-              Deixar de seguir
+            <button class="btn btn-primary btn-error btn-sm w-full mt-8" type="submit">
+              <iconify-icon icon="fe:user-minus" width={18} />
+              Parar de Seguir
             </button>
           </form>
         {/if}
