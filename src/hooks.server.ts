@@ -18,5 +18,25 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
   }
 
+  if (event.url.pathname.startsWith('/profile') && event.params.username) {
+    const self = await event.locals.auth.validate();
+    const { username } = event.params;
+
+    const user = await prisma.user.findFirst({
+      where: { username },
+      include: { followers: true, following: true, badges: true },
+    });
+
+    if (!user) {
+      return await resolve(event);
+    }
+
+    if (!event.url.pathname.endsWith(username)) {
+      if (self?.user.userId !== user.id && user.profileVisibility === 'private') {
+        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile/' + username);
+      }
+    }
+  }
+
   return await resolve(event);
 };
