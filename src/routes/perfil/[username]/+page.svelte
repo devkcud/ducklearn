@@ -23,5 +23,7 @@
     </a>
   </div>
 {:else}
-  <Profile {data} />
+  <section class="flex h-full w-full max-sm:flex-col p-4">
+    <Profile {data} />
+  </section>
 {/if}
