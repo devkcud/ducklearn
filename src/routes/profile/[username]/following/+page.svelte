@@ -17,7 +17,7 @@
   let searchTerm = '';
 
   const ommitedFollowing = data.following.filter((user) => user.profileVisibility === 'private');
-  const usePlural = ommitedFollowing.length > 1 ? 's' : '';
+  const usePlural = ommitedFollowing.length !== 1 ? 's' : '';
 
   $: filteredFollowing = data.following.filter(
     (user) =>
