@@ -10,13 +10,13 @@
         <li>
           <a href="/" class="link link-primary gap-1">
             <iconify-icon icon="mdi:home" width={18} />
-            Home
+            home
           </a>
         </li>
         {#each $page.url.pathname.split('/').slice(1) as path}
           <li>
             {#if path === $page.params.username}
-              <a href="/profile/{path}" class="link link-primary gap-1">
+              <a href="/perfil/{path}" class="link link-primary gap-1">
                 <iconify-icon icon="mdi:account" width={18} />
                 {path}
               </a>

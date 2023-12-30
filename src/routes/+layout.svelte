@@ -73,15 +73,15 @@
 
         <ul class="dropdown-content menu z-[1] p-2 mt-5 shadow bg-base-200 rounded-box w-52">
           <li>
-            <a href="/profile">
+            <a href="/perfil">
               <iconify-icon icon="mdi:account" />
-              Profile
+              Perfil
             </a>
           </li>
           <li>
             <a href="/logout" class="text-error">
               <iconify-icon icon="mdi:logout" />
-              Logout
+              Sair
             </a>
           </li>
         </ul>

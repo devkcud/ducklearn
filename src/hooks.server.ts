@@ -6,7 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   event.locals.auth = auth.handleRequest(event);
   const session = await event.locals.auth.validate();
 
-  if (event.url.pathname.startsWith('/profile') || event.url.pathname.startsWith('/logout')) {
+  if (event.url.pathname.startsWith('/perfil') || event.url.pathname.startsWith('/logout')) {
     if (!session) {
       throw redirect(StatusCodes.MOVED_TEMPORARILY, '/login');
     }
@@ -14,11 +14,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   if (event.url.pathname.startsWith('/login') || event.url.pathname.startsWith('/register')) {
     if (session) {
-      throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile');
+      throw redirect(StatusCodes.MOVED_TEMPORARILY, '/perfil');
     }
   }
 
-  if (event.url.pathname.startsWith('/profile') && event.params.username) {
+  if (event.url.pathname.startsWith('/perfil') && event.params.username) {
     const self = await event.locals.auth.validate();
     const { username } = event.params;
 
@@ -29,11 +29,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     if (!event.url.pathname.endsWith(username)) {
       if (!user) {
-        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile/' + username);
+        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/perfil/' + username);
       }
 
       if (self?.user.userId !== user.id && user.profileVisibility === 'private') {
-        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile/' + username);
+        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/perfil/' + username);
       }
     }
   }

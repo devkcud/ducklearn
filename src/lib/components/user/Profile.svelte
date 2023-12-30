@@ -13,7 +13,7 @@
 
 <section class="flex h-full w-full max-sm:flex-col p-4">
   <div
-    class="flex flex-col gap-4 my-auto sm:border-r-2 border-[var(--fallback-bc,oklch(var(--bc)/0.1))] pr-4 w-full max-w-md max-sm:mx-auto"
+    class="flex flex-col h-fit gap-4 sm:border-r-2 border-[var(--fallback-bc,oklch(var(--bc)/0.1))] pr-4 w-full max-w-md max-sm:mx-auto"
   >
     <div class="flex items-center gap-4">
       <div class="avatar">
@@ -57,7 +57,7 @@
         <iconify-icon icon="game-icons:shadow-follower" width={18} />
         Seguidores:
         <div class="tooltip" data-tip={data.followers.length || 0}>
-          <a href="/profile/{data.username}/followers" class="link link-primary w-fit">
+          <a href="/perfil/{data.username}/seguidores" class="link link-primary w-fit">
             {formatNumber(data.followers.length || 0)}
           </a>
         </div>
@@ -67,7 +67,7 @@
         <iconify-icon icon="mingcute:user-follow-2-fill" width={18} />
         Seguindo:
         <div class="tooltip" data-tip={data.following.length || 0}>
-          <a href="/profile/{data.username}/following" class="link link-primary w-fit">
+          <a href="/perfil/{data.username}/seguindo" class="link link-primary w-fit">
             {formatNumber(data.following.length || 0)}
           </a>
         </div>

@@ -65,7 +65,7 @@
         <div class="flex flex-col">
           <div class="flex flex-col">
             <a
-              href="/profile/{following.username}"
+              href="/perfil/{following.username}"
               class="flex items-center gap-4 text-xl text-primary font-bold"
             >
               {following.displayName}
@@ -75,7 +75,7 @@
             </span>
           </div>
 
-          <a href="/profile/{following.username}" class="btn btn-ghost btn-xs w-fit" type="submit">
+          <a href="/perfil/{following.username}" class="btn btn-ghost btn-xs w-fit" type="submit">
             <iconify-icon icon="mdi:user" width={18} />
             Ver perfil
           </a>

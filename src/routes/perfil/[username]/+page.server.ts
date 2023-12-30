@@ -96,7 +96,7 @@ export const actions: Actions = {
       console.error(error);
     }
 
-    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/profile/${username}`);
+    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/perfil/${username}`);
   },
   unfollow: async ({ request, locals }) => {
     const self = await locals.auth.validate();
@@ -120,6 +120,6 @@ export const actions: Actions = {
       console.error(error);
     }
 
-    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/profile/${username}`);
+    throw redirect(StatusCodes.MOVED_TEMPORARILY, `/perfil/${username}`);
   },
 };

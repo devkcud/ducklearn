@@ -17,7 +17,7 @@
   <div class="flex flex-col gap-4 p-8">
     <p class="text-error w-fit mx-auto">{data.error}</p>
 
-    <a class="btn btn-primary btn-sm w-fit mx-auto" href="/profile">
+    <a class="btn btn-primary btn-sm w-fit mx-auto" href="/perfil">
       <iconify-icon icon="carbon:return" width={24} />
       Voltar
     </a>
