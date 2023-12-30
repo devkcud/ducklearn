@@ -5,7 +5,7 @@
   export let data: Lucia.DatabaseUserAttributes & {
     followers: { followerId: string; followingId: string }[];
     following: { followerId: string; followingId: string }[];
-    canFollow: boolean;
+    isSelf: boolean;
     isFollowing: boolean;
     badges: { id: string; name: string }[];
   };
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    {#if data.canFollow}
+    {#if data.isSelf}
       {#if data.isFollowing === false}
         <form action="?/follow" method="POST">
           <input type="hidden" name="username" value={data.username} />

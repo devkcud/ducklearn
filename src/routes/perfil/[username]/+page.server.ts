@@ -63,7 +63,7 @@ export const load: PageServerLoad = async ({
       stars: user.stars,
       followers: user.followers,
       following: user.following,
-      canFollow: self?.user.userId !== user.id,
+      isSelf: self?.user.userId !== user.id,
       isFollowing,
       badges,
     };

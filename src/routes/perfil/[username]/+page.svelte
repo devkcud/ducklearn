@@ -6,7 +6,7 @@
     | (Lucia.DatabaseUserAttributes & {
         followers: { followerId: string; followingId: string }[];
         following: { followerId: string; followingId: string }[];
-        canFollow: boolean;
+        isSelf: boolean;
         isFollowing: boolean;
         badges: { id: string; name: string }[];
       })
