@@ -27,11 +27,11 @@ export const handle: Handle = async ({ event, resolve }) => {
       include: { followers: true, following: true, badges: true },
     });
 
-    if (!user) {
-      return await resolve(event);
-    }
-
     if (!event.url.pathname.endsWith(username)) {
+      if (!user) {
+        throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile/' + username);
+      }
+
       if (self?.user.userId !== user.id && user.profileVisibility === 'private') {
         throw redirect(StatusCodes.MOVED_TEMPORARILY, '/profile/' + username);
       }
