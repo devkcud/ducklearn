@@ -7,51 +7,30 @@
 
   let passwordValue: string = '';
 
-  $: getPasswordStrength = () => {
-    return (
-      Number(/[^a-zA-Z0-9]/.test(passwordValue)) +
-      Number(passwordValue.length > 8) +
-      Number(passwordValue.length > 24) +
-      Number(/[a-zA-Z]/.test(passwordValue)) +
-      Number(/[0-9]/.test(passwordValue))
-    );
-  };
+  $: passwordStrengthColor = {
+    0: '',
+    1: 'error',
+    2: 'error',
+    3: 'warning',
+    4: 'success',
+    5: 'success',
+  }[passwordStrength];
 
-  $: getPasswordStrengthColor = () => {
-    switch (getPasswordStrength()) {
-      default:
-      case 0:
-        return '';
-      case 1:
-        return 'error';
-      case 2:
-        return 'warning';
-      case 3:
-        return 'warning';
-      case 4:
-        return 'warning';
-      case 5:
-        return 'success';
-    }
-  };
+  $: passwordStrengthLabel = {
+    0: '',
+    1: 'Muito Fraca',
+    2: 'Fraca',
+    3: 'Moderada',
+    4: 'Forte',
+    5: 'Muito Forte',
+  }[passwordStrength];
 
-  $: getPasswordLabel = () => {
-    switch (getPasswordStrength()) {
-      default:
-      case 0:
-        return '';
-      case 1:
-        return 'Muito Fraca';
-      case 2:
-        return 'Fraca';
-      case 3:
-        return 'Moderada';
-      case 4:
-        return 'Forte';
-      case 5:
-        return 'Muito Forte';
-    }
-  };
+  $: passwordStrength =
+    Number(/[^a-zA-Z0-9]/.test(passwordValue)) +
+    Number(passwordValue.length > 8) +
+    Number(passwordValue.length > 24) +
+    Number(/[a-zA-Z]/.test(passwordValue)) +
+    Number(/[0-9]/.test(passwordValue));
 </script>
 
 <svelte:head>
@@ -94,22 +73,22 @@
       <div>
         <p
           class="flex items-center justify-center gap-2"
-          class:text-success={getPasswordStrength() === 5}
+          class:text-success={passwordStrength === 5}
         >
-          <span>{getPasswordLabel()}</span>
+          <span>{passwordStrengthLabel}</span>
 
-          {#if getPasswordStrength() === 5}
+          {#if passwordStrength === 5}
             <iconify-icon icon="mdi:check" width={18} />
           {/if}
         </p>
 
         <div class="h-2 bg-base-300 rounded-full overflow-hidden">
           <div
-            style="transform: scaleX({getPasswordStrength() / 5})"
+            style="transform: scaleX({passwordStrength / 5})"
             class="h-full transition duration-500 origin-top-left"
-            class:bg-error={getPasswordStrengthColor() === 'error'}
-            class:bg-warning={getPasswordStrengthColor() === 'warning'}
-            class:bg-success={getPasswordStrengthColor() === 'success'}
+            class:bg-error={passwordStrengthColor === 'error'}
+            class:bg-warning={passwordStrengthColor === 'warning'}
+            class:bg-success={passwordStrengthColor === 'success'}
           ></div>
         </div>
       </div>
