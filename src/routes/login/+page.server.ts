@@ -46,6 +46,6 @@ export const actions: Actions = {
       return fail(StatusCodes.INTERNAL_SERVER_ERROR, { error: 'Um erro inesperado aconteceu' });
     }
 
-    throw redirect(StatusCodes.TEMPORARY_REDIRECT, '/');
+    throw redirect(StatusCodes.TEMPORARY_REDIRECT, '/perfil');
   },
 };

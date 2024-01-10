@@ -2,8 +2,6 @@
   import 'iconify-icon';
   import Profile from '$lib/components/user/Profile.svelte';
 
-  import { page } from '$app/stores';
-
   export let data:
     | (Lucia.DatabaseUserAttributes & {
         userLinks: { id: string; name: string; url: string }[];

@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>@{$page.params.username} | DuckLearn</title>
+  <title>DuckLearn | @{$page.params.username}</title>
 </svelte:head>
 
 <div class="w-full">
