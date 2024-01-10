@@ -1,33 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  // I don't know how to manage cookies inside a +layout.svelte file, I'll stick to js-cookie
-  import Cookies from 'js-cookie';
-
   import 'iconify-icon';
 
-  import CookieUsage from '$lib/components/CookieUsage.svelte';
   import '../app.css';
   import ViewTransition from '$lib/components/ViewTransition.svelte';
   import type { LayoutData } from './$types';
-
-  let themeController: HTMLInputElement;
-  let theme: string = Cookies.get('theme') || 'dark';
-
-  onMount(() => {
-    themeController.checked = theme === 'light';
-  });
-
-  function setCookieTheme(event: Event) {
-    if (Cookies.get('use-cookies') !== 'true') {
-      return;
-    }
-
-    const target = event.target as HTMLInputElement;
-    Cookies.set('theme', target.checked ? 'light' : 'dark', {
-      expires: 7,
-      sameSite: 'strict',
-    });
-  }
 
   export let data: LayoutData & {
     logged: boolean;
@@ -36,8 +12,6 @@
     };
   };
 </script>
-
-<CookieUsage />
 
 <header class="navbar max-w-5xl bleed-bg bleed-base-200 mx-auto h-[64px]">
   <section class="flex-1">
@@ -48,13 +22,7 @@
   </section>
 
   <label class="swap swap-rotate mr-2">
-    <input
-      type="checkbox"
-      class="theme-controller"
-      value="light"
-      bind:this={themeController}
-      on:change={setCookieTheme}
-    />
+    <input type="checkbox" class="theme-controller" value="light" />
 
     <iconify-icon icon="ph:sun" width={20} class="swap-off" />
     <iconify-icon icon="ph:moon" width={20} class="swap-on" />

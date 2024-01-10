@@ -43,7 +43,6 @@
     "@prisma/client": "^5.7.1",
     "http-status-codes": "^2.3.0",
     "iconify-icon": "^1.0.8",
-    "js-cookie": "^3.0.5",
     "lucia": "latest",
     "prettier-plugin-prisma": "^5.0.0",
     "zod": "^3.22.4"

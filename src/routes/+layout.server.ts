@@ -1,6 +1,6 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ locals }: { locals: App.Locals }) => {
+export const load: LayoutServerLoad = async ({ locals }: { locals: App.Locals }) => {
   const user = await locals.auth.validate();
 
   if (!user) {
