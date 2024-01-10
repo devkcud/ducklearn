@@ -3,6 +3,10 @@
   import { page } from '$app/stores';
 </script>
 
+<svelte:head>
+  <title>@{$page.params.username} | DuckLearn</title>
+</svelte:head>
+
 <div class="w-full">
   <div class="sticky top-0 flex items-center w-full bg-base-300">
     <div class="text-sm breadcrumbs w-fit mx-auto">
