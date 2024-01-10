@@ -53,7 +53,7 @@ export const actions: Actions = {
           about: '',
           createdAt: new Date(),
           updatedAt: new Date(),
-          stars: 0,
+          stars: 500,
           profileVisibility: 'public',
         },
       });

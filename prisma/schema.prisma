@@ -9,14 +9,15 @@ datasource db {
 }
 
 model User {
-  id                String   @id @unique
-  username          String   @unique
+  id                String     @id @unique
+  username          String     @unique
   displayName       String
-  about             String   @default("")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  stars             Int      @default(0)
-  profileVisibility String   @default("public")
+  about             String     @default("")
+  userLinks         UserLink[]
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  stars             Int        @default(0)
+  profileVisibility String     @default("public")
 
   followers Follows[] @relation("following")
   following Follows[] @relation("follower")
@@ -27,6 +28,15 @@ model User {
   Key     Key[]
 
   @@map("users")
+}
+
+model UserLink {
+  id   String @id @default(cuid())
+  name String
+  url  String
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model Follows {

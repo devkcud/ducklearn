@@ -4,6 +4,7 @@
 
   export let data:
     | (Lucia.DatabaseUserAttributes & {
+        userLinks: { id: string; name: string; url: string }[];
         followers: { followerId: string; followingId: string }[];
         following: { followerId: string; followingId: string }[];
         isSelf: boolean;

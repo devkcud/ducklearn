@@ -17,7 +17,7 @@ export const load: PageServerLoad = async ({
   try {
     const user = await prisma.user.findFirst({
       where: { username },
-      include: { followers: true, following: true, badges: true },
+      include: { followers: true, following: true, badges: true, userLinks: true },
     });
 
     if (!user) {
@@ -58,6 +58,7 @@ export const load: PageServerLoad = async ({
       username: user.username,
       displayName: user.displayName,
       about: user.about,
+      userLinks: user.userLinks,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       stars: user.stars,

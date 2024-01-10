@@ -3,6 +3,7 @@
   import { formatDate, formatNumber } from '$lib/function/format';
 
   export let data: Lucia.DatabaseUserAttributes & {
+    userLinks: { id: string; name: string; url: string }[];
     followers: { followerId: string; followingId: string }[];
     following: { followerId: string; followingId: string }[];
     isSelf: boolean;
@@ -104,6 +105,28 @@
       </div>
     {/if}
     -->
+
+  {#if data.userLinks.length !== 0}
+    <div class="divider"></div>
+
+    <p class="text-lg text-primary font-bold">Links:</p>
+
+    <div class="flex flex-col">
+      {#each data.userLinks as link}
+        <div class="tooltip tooltip-right w-fit" data-tip={link.url}>
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noreferrer"
+            class="link link-primary flex gap-2 p-1 items-center"
+          >
+            <iconify-icon icon="ph:link" width={18} />
+            {link.name}
+          </a>
+        </div>
+      {/each}
+    </div>
+  {/if}
 
   <div class="divider"></div>
 
