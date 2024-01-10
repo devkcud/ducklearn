@@ -14,6 +14,7 @@ export const actions: Actions = {
           .string({
             required_error: 'O nome de usuário é obrigatório.',
           })
+          .regex(/^[a-z0-9]+$/, 'O nome de usuário deve conter apenas letras minúsculas e números')
           .min(3, 'O nome de usuário deve ter no mínimo 3 caracteres.')
           .max(32, 'O nome de usuário deve ter no máximo 32 caracteres.'),
         password: z.coerce
