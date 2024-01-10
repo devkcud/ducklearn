@@ -8,26 +8,23 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export const actions: Actions = {
   default: async ({ request }: { request: Request }) => {
-    // NOTE: I don't think it's that necessary to add so much validation in the password field, so I will be keeping it as it is.
     const registerForm = z
       .object({
-        username: z
+        username: z.coerce
           .string({
             required_error: 'O nome de usuário é obrigatório.',
-            invalid_type_error: 'O nome de usuário deve ser um texto.',
           })
           .min(3, 'O nome de usuário deve ter no mínimo 3 caracteres.')
           .max(32, 'O nome de usuário deve ter no máximo 32 caracteres.'),
-        password: z
+        password: z.coerce
           .string({
             required_error: 'A senha é obrigatória.',
-            invalid_type_error: 'A senha deve ser um texto.',
           })
+          .regex(/[^a-zA-Z0-9]/, 'A senha deve conter ao menos 1 caractere especial')
           .min(8, 'A senha deve ter pelo menos 8 caracteres')
           .max(64, 'A senha deve ter no maximo 64 caracteres'),
-        passwordConfirm: z.string({
+        passwordConfirm: z.coerce.string({
           required_error: 'A confirmação da senha é obrigatória.',
-          invalid_type_error: 'A confirmação da senha deve ser um texto.',
         }),
       })
       .refine((data) => data.password === data.passwordConfirm, {

@@ -9,20 +9,12 @@ import { LuciaError } from 'lucia';
 export const actions: Actions = {
   default: async ({ request, locals }: { request: Request; locals: App.Locals }) => {
     const registerForm = z.object({
-      username: z
-        .string({
-          required_error: 'O nome de usuário é obrigatório.',
-          invalid_type_error: 'O nome de usuário deve ser um texto.',
-        })
-        .min(3, 'O nome de usuário deve ter no mínimo 3 caracteres.')
-        .max(32, 'O nome de usuário deve ter no máximo 32 caracteres.'),
-      password: z
-        .string({
-          required_error: 'A senha é obrigatória.',
-          invalid_type_error: 'A senha deve ser um texto.',
-        })
-        .min(8, 'A senha deve ter pelo menos 8 caracteres')
-        .max(64, 'A senha deve ter no maximo 64 caracteres'),
+      username: z.coerce.string({
+        required_error: 'O nome de usuário é obrigatório.',
+      }),
+      password: z.coerce.string({
+        required_error: 'A senha é obrigatória.',
+      }),
     });
 
     const parse = registerForm.safeParse(Object.fromEntries(await request.formData()));
