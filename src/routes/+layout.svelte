@@ -21,13 +21,6 @@
     </a>
   </section>
 
-  <label class="swap swap-rotate mr-2">
-    <input type="checkbox" class="theme-controller" value="light" />
-
-    <iconify-icon icon="ph:sun" width={20} class="swap-off" />
-    <iconify-icon icon="ph:moon" width={20} class="swap-on" />
-  </label>
-
   {#if data.logged}
     <section>
       <div class="dropdown dropdown-end">
