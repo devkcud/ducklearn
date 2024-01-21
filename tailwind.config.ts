@@ -11,28 +11,16 @@ export default {
   daisyui: {
     themes: [
       {
-        light: {
-          ...require('daisyui/src/theming/themes')['cmyk'],
-
-          '--rounded-box': '0.25rem',
-          '--rounded-btn': '.125rem',
-          '--rounded-badge': '.125rem',
-
-          primary: '#45AEEE',
-          secondary: '#E8488A',
-          accent: '#FFF232',
-
-          info: '#0288D1',
-          success: '#2E7D32',
-          warning: '#ED6C02',
-          error: '#D32F2F',
-        },
         dark: {
           ...require('daisyui/src/theming/themes')['dim'],
 
           '--rounded-box': '0.25rem',
           '--rounded-btn': '.125rem',
           '--rounded-badge': '.125rem',
+
+          'base-100': '#080808',
+          'base-200': '#040404',
+          'base-300': '#040404',
 
           primary: '#45AEEE',
           secondary: '#E8488A',
