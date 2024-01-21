@@ -14,7 +14,6 @@
         <li>
           <a href="/" class="link link-primary gap-1">
             <iconify-icon icon="mdi:home" width={18} />
-            home
           </a>
         </li>
         {#each $page.url.pathname.split('/').slice(1) as path}
@@ -25,7 +24,7 @@
                 {path}
               </a>
             {:else}
-              <span>
+              <span class="text-primary">
                 {path}
               </span>
             {/if}

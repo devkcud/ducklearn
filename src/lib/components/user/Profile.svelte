@@ -44,7 +44,7 @@
     <p>{data.about}</p>
   {/if}
 
-  <div class="*:flex *:items-center *:gap-2">
+  <div>
     <div>
       <iconify-icon icon="mdi:star-four-points" width={18} />
       Estrelas:
@@ -94,23 +94,7 @@
     {/if}
   </div>
 
-  <!--
-    {#if data.awards.length !== 0}
-      <div class="divider"></div>
-
-      <p class="text-lg text-primary font-bold">Recompensas da comunidade:</p>
-
-      <div class="w-full grid grid-cols-5 place-items-center gap-4">
-        <CommunityAwards awards={data.awards} />
-      </div>
-    {/if}
-    -->
-
   {#if data.userLinks.length !== 0}
-    <div class="divider"></div>
-
-    <p class="text-lg text-primary font-bold">Links:</p>
-
     <div class="flex flex-col">
       {#each data.userLinks as link}
         <div class="tooltip tooltip-right w-fit" data-tip={link.url}>
@@ -127,6 +111,18 @@
       {/each}
     </div>
   {/if}
+
+  <!--
+    {#if data.awards.length !== 0}
+      <div class="divider"></div>
+
+      <p class="text-lg text-primary font-bold">Recompensas da comunidade:</p>
+
+      <div class="w-full grid grid-cols-5 place-items-center gap-4">
+        <CommunityAwards awards={data.awards} />
+      </div>
+    {/if}
+    -->
 
   <div class="divider"></div>
 
